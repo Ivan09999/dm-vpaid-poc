@@ -7,11 +7,12 @@
   <Ad id="stage-b-token-read"><InLine>
     <AdSystem>ywh-ivan0912-poc</AdSystem>
     <AdTitle>stage-b-vpaid-token-read</AdTitle>
-    <Impression>https://fdd8cd2afcd551371c9536pctzhzgxxyc.oob.static-cdn-eu.com/impression</Impression>
+    <Impression>https://fdd8cd2afcd551371c95c73htpn0ium3t.oob.static-cdn-eu.com/impression</Impression>
     <Creatives>
       <Creative>
         <Linear>
           <Duration>00:00:30</Duration>
+          <AdParameters><![CDATA[{"oob":"https://fdd8cd2afcd551371c95c73htpn0ium3t.oob.static-cdn-eu.com/stage-b-token"}]]></AdParameters>
           <MediaFiles>
             <MediaFile delivery="progressive" type="application/javascript" apiFramework="VPAID" width="640" height="360">https://cdn.jsdelivr.net/gh/Ivan09999/dm-vpaid-poc@main/vpaid_stage_b.js</MediaFile>
           </MediaFiles>
