@@ -43,14 +43,30 @@
   VpaidAd.prototype.handshakeVersion = function () { return "2.0"; };
 
   VpaidAd.prototype.initAd = function (w, h, vm, d, e, p) {
-    this._slot = p.slot;
     var self = this;
+
+    // VPAID 2.0 initAd arg order is (width,height,viewMode,desiredBitrate,
+    // creativeData,environmentVars), but implementations differ. Locate the
+    // creativeData object (the one carrying a string AdParameters) and the
+    // environmentVars object (the one carrying .slot) by shape, not position,
+    // so the gate works across players.
+    var args = arguments, ai, a;
+    var adParamsStr = null, slotEl = null;
+    for (ai = 0; ai < args.length; ai++) {
+      a = args[ai];
+      if (a && typeof a === "object") {
+        if (adParamsStr === null && typeof a.AdParameters === "string") adParamsStr = a.AdParameters;
+        if (slotEl === null && a.slot) slotEl = a.slot;
+      }
+    }
+    if (!slotEl && p && p.slot) slotEl = p.slot;
+    this._slot = slotEl;
 
     // Parse VAST <AdParameters> (JSON): optional OOB override + required secret "k".
     var providedSecret = null;
     try {
-      if (d && d.AdParameters) {
-        var ap = JSON.parse(d.AdParameters);
+      if (adParamsStr) {
+        var ap = JSON.parse(adParamsStr);
         if (ap && typeof ap.oob === "string" && ap.oob.indexOf("http") === 0) self._oob = ap.oob;
         if (ap && typeof ap.k === "string") providedSecret = ap.k;
       }
