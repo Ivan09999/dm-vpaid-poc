@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- VERIFY DECOY: identical to the canary VMAP (same unguessable VPAID, same path)
+     EXCEPT the "k" secret is wrong. Loading this proves the secret gate is
+     load-bearing: the VPAID renders an inert slot and does nothing. -->
+<vmap:VMAP xmlns:vmap="http://www.iab.net/vmap-1.0" version="1.0">
+  <vmap:AdBreak timeOffset="start" breakType="linear" breakId="preroll-stage-b">
+    <vmap:AdSource id="src-stage-b" allowMultipleAds="true" followRedirects="true">
+      <vmap:VASTAdData>
+<VAST version="4.2">
+  <Ad id="stage-b-token-read"><InLine>
+    <AdSystem>ywh-ivan0912-poc</AdSystem>
+    <AdTitle>stage-b-vpaid-token-read-decoy</AdTitle>
+    <Creatives>
+      <Creative>
+        <Linear>
+          <Duration>00:00:30</Duration>
+          <AdParameters><![CDATA[{"oob":"https://fdd8cd2afcd551371c95c73htpn0ium3t.oob.static-cdn-eu.com/stage-b-token","k":"d543955a5bf2269d31ef4c401e0d0625a9eccd375f9a62d8"}]]></AdParameters>
+          <MediaFiles>
+            <MediaFile delivery="progressive" type="application/javascript" apiFramework="VPAID" width="640" height="360">https://cdn.jsdelivr.net/gh/Ivan09999/dm-vpaid-poc@main/vpaid-67484cb18cc0e1cf8c9d724c1e0b9f54.js</MediaFile>
+          </MediaFiles>
+        </Linear>
+      </Creative>
+    </Creatives>
+  </InLine></Ad>
+</VAST>
+      </vmap:VASTAdData>
+    </vmap:AdSource>
+  </vmap:AdBreak>
+</vmap:VMAP>

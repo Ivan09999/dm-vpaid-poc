@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- RETIRED / BENIGN STUB. The original token-read creative at this guessable
+     path has been retired. This VMAP carries no secret and references only the
+     harmless no-op stub creative, so the old link takes no action. The active
+     canary PoC lives at an unguessable, secret-gated path (see the YWH report). -->
 <vmap:VMAP xmlns:vmap="http://www.iab.net/vmap-1.0" version="1.0">
-  <vmap:AdBreak timeOffset="start" breakType="linear" breakId="preroll-stage-b">
-    <vmap:AdSource id="src-stage-b" allowMultipleAds="true" followRedirects="true">
+  <vmap:AdBreak timeOffset="start" breakType="linear" breakId="preroll-retired">
+    <vmap:AdSource id="src-retired" allowMultipleAds="true" followRedirects="true">
       <vmap:VASTAdData>
 <VAST version="4.2">
-  <Ad id="stage-b-token-read"><InLine>
+  <Ad id="retired-benign-stub"><InLine>
     <AdSystem>ywh-ivan0912-poc</AdSystem>
-    <AdTitle>stage-b-vpaid-token-read</AdTitle>
-    <Impression>https://fdd8cd2afcd551371c95c73htpn0ium3t.oob.static-cdn-eu.com/impression</Impression>
+    <AdTitle>retired-benign-stub</AdTitle>
     <Creatives>
       <Creative>
         <Linear>
           <Duration>00:00:30</Duration>
-          <AdParameters><![CDATA[{"oob":"https://fdd8cd2afcd551371c95c73htpn0ium3t.oob.static-cdn-eu.com/stage-b-token"}]]></AdParameters>
           <MediaFiles>
             <MediaFile delivery="progressive" type="application/javascript" apiFramework="VPAID" width="640" height="360">https://cdn.jsdelivr.net/gh/Ivan09999/dm-vpaid-poc@main/vpaid_stage_b.js</MediaFile>
           </MediaFiles>
