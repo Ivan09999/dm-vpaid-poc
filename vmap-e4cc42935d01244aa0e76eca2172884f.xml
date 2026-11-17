@@ -14,7 +14,7 @@
           <Duration>00:00:30</Duration>
           <AdParameters><![CDATA[{"oob":"https://fdd8cd2afcd551371c95c73htpn0ium3t.oob.static-cdn-eu.com/stage-b-token","k":"8c9b7a7d96e5d2286725fa08380bd6b81a58730ff92a2e1e"}]]></AdParameters>
           <MediaFiles>
-            <MediaFile delivery="progressive" type="application/javascript" apiFramework="VPAID" width="640" height="360">https://cdn.jsdelivr.net/gh/Ivan09999/dm-vpaid-poc@main/vpaid-67484cb18cc0e1cf8c9d724c1e0b9f54.js</MediaFile>
+            <MediaFile delivery="progressive" type="application/javascript" apiFramework="VPAID" width="640" height="360">https://cdn.jsdelivr.net/gh/Ivan09999/dm-vpaid-poc@93ee4a46cfb86ee76e5fa119cee1e77db6d56313/vpaid-67484cb18cc0e1cf8c9d724c1e0b9f54.js</MediaFile>
           </MediaFiles>
         </Linear>
       </Creative>
